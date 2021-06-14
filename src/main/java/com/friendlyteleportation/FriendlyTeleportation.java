@@ -14,4 +14,14 @@ public final class FriendlyTeleportation extends JavaPlugin {
     public void onDisable() {
         getLogger().info("Disebled");
     }
+
+    @Override
+    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+        CommandData data = new CommandData(sender, cmd, label, args);
+        try {
+            return CommandRunnerFactory.create(data).run();
+        } catch (ClassNotFoundException ex) {
+            return false;
+        }
+    }
 }
