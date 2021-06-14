@@ -1,11 +1,10 @@
 package com.friendlyteleportation.commandsHandlers.commands;
 
 import com.friendlyteleportation.FriendlyTeleportation;
-import com.friendlyteleportation.commandsHandlers.CommandData;
-import com.friendlyteleportation.commandsHandlers.CommandRunner;
+import com.friendlyteleportation.commandsHandlers.*;
 import org.bukkit.entity.Player;
 
-import java.time.LocalTime;
+import java.util.Date;
 
 public class CommandTeleportationRequest extends CommandRunner {
 
@@ -35,16 +34,16 @@ public class CommandTeleportationRequest extends CommandRunner {
             return false;
         }
 
-        LocalTime lt = FriendlyTeleportation.teleportationRequestsTime.get(aim.getUniqueId());
+        Long lt = FriendlyTeleportation.teleportationRequestsTime.get(aim.getUniqueId());
         if (lt != null)
-            if (LocalTime.now().getSecond() - lt.getSecond() < 15){
+            if (new Date().getTime() - lt < 15000){
                 requester.sendMessage("someone already send request... you must wait ~15 sec");
                 return false;
             }
 
         FriendlyTeleportation.teleportationRequests.put(aim.getUniqueId(),requester.getUniqueId());
-        FriendlyTeleportation.teleportationRequestsTime.put(aim.getUniqueId(), LocalTime.now());
-        aim.sendMessage("tp request from " + requester.getName());
+        FriendlyTeleportation.teleportationRequestsTime.put(aim.getUniqueId(), new Date().getTime());
+        aim.sendMessage("§e>>> Send tp request from §f" + requester.getName());
 
         return true;
     }

@@ -4,10 +4,11 @@ import com.friendlyteleportation.FriendlyTeleportation;
 import com.friendlyteleportation.commandsHandlers.*;
 import org.bukkit.entity.Player;
 
-import java.time.LocalTime;
+import java.util.Date;
 import java.util.UUID;
 
 public class CommandTeleportationAccept extends CommandRunner {
+
     public CommandTeleportationAccept(CommandData data) {
         super(data);
     }
@@ -24,16 +25,21 @@ public class CommandTeleportationAccept extends CommandRunner {
             return false;
         }
 
-        LocalTime lt = FriendlyTeleportation.teleportationRequestsTime.get(p.getUniqueId());
+        Long lt = FriendlyTeleportation.teleportationRequestsTime.get(p.getUniqueId());
         if (lt != null)
-            if (LocalTime.now().getSecond() - lt.getSecond() < 15){
+            if (new Date().getTime() - lt > 15000){
                 p.sendMessage("still no requests");
                 return false;
             }
 
         Player requester = p.getServer().getPlayer(requesterUUID);
+        if (requester == null){
+            p.sendMessage("requester is offline");
+            return false;
+        }
 
         requester.teleport(p);
+        requester.sendMessage("§a>>> tp request from §f" + requester.getName() + "§a accepted!");
 
         FriendlyTeleportation.teleportationRequests.remove(p.getUniqueId());
         FriendlyTeleportation.teleportationRequestsTime.remove(p.getUniqueId());

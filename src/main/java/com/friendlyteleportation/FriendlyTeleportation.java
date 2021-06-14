@@ -13,7 +13,7 @@ public final class FriendlyTeleportation extends JavaPlugin {
 
     public static JavaPlugin plugin;
     public static HashMap<UUID, UUID> teleportationRequests = new HashMap<>();
-    public static HashMap<UUID, LocalTime> teleportationRequestsTime = new HashMap<>();
+    public static HashMap<UUID, Long> teleportationRequestsTime = new HashMap<>();
 
     @Override
     public void onEnable() {
