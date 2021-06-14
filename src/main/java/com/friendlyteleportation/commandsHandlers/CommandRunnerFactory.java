@@ -9,7 +9,10 @@ public class CommandRunnerFactory {
         String command = data.label.toLowerCase();
 
         switch (command) {
-            // commands will be run here
+            case "tpr":
+                return new CommandTeleportationRequest(data);
+            case "tpa":
+                return new CommandTeleportationAccept(data);
             default:
                 throw new ClassNotFoundException();
         }
