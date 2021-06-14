@@ -1,0 +1,6 @@
+name: FriendlyTeleportation
+version: ${project.version}
+main: com.friendlyteleportation.friendlyteleportation.FriendlyTeleportation
+api-version: 1.15
+authors: [ Kamil_Pawlaczyk ]
+description: Plugin to teleportaion
