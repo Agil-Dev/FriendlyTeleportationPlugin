@@ -1,13 +1,24 @@
 package com.friendlyteleportation;
 
+import com.friendlyteleportation.commandsHandlers.*;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.time.LocalTime;
+import java.util.HashMap;
+import java.util.UUID;
+
 public final class FriendlyTeleportation extends JavaPlugin {
+
+    public static JavaPlugin plugin;
+    public static HashMap<UUID, UUID> teleportationRequests = new HashMap<>();
+    public static HashMap<UUID, LocalTime> teleportationRequestsTime = new HashMap<>();
 
     @Override
     public void onEnable() {
         getLogger().info("Enebled");
-
+        plugin = this;
     }
 
     @Override
