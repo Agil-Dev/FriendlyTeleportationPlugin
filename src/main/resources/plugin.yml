@@ -4,3 +4,11 @@ main: com.friendlyteleportation.FriendlyTeleportation
 api-version: 1.15
 authors: [ Kamil_Pawlaczyk ]
 description: Plugin to teleportaion
+commands:
+  tpr:
+    description: Teleportation request.
+    usage: /tpr <player>
+
+  tpa:
+    description: Accept tp request.
+    usage: /tpa
